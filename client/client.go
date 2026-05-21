@@ -9,9 +9,9 @@ import (
 	"io"
 )
 
-/**
- * Model for initing client
- */
+// Description:
+//
+// Model for initing client
 type Config struct {
 	// accesskey id
 	AccessKeyId *string `json:"accessKeyId,omitempty" xml:"accessKeyId,omitempty"`
@@ -20,26 +20,66 @@ type Config struct {
 	// security token
 	SecurityToken *string `json:"securityToken,omitempty" xml:"securityToken,omitempty"`
 	// http protocol
+	//
+	// example:
+	//
+	// http
 	Protocol *string `json:"protocol,omitempty" xml:"protocol,omitempty"`
 	// read timeout
+	//
+	// example:
+	//
+	// 10
 	ReadTimeout *int `json:"readTimeout,omitempty" xml:"readTimeout,omitempty"`
 	// connect timeout
+	//
+	// example:
+	//
+	// 10
 	ConnectTimeout *int `json:"connectTimeout,omitempty" xml:"connectTimeout,omitempty"`
 	// http proxy
+	//
+	// example:
+	//
+	// http://localhost
 	HttpProxy *string `json:"httpProxy,omitempty" xml:"httpProxy,omitempty"`
 	// https proxy
+	//
+	// example:
+	//
+	// https://localhost
 	HttpsProxy *string `json:"httpsProxy,omitempty" xml:"httpsProxy,omitempty"`
 	// endpoint
+	//
+	// example:
+	//
+	// cs.aliyuncs.com
 	Endpoint *string `json:"endpoint,omitempty" xml:"endpoint,omitempty"`
 	// proxy white list
+	//
+	// example:
+	//
+	// http://localhost
 	NoProxy *string `json:"noProxy,omitempty" xml:"noProxy,omitempty"`
 	// max idle conns
+	//
+	// example:
+	//
+	// 3
 	MaxIdleConns *int `json:"maxIdleConns,omitempty" xml:"maxIdleConns,omitempty"`
 	// user agent
+	//
+	// example:
+	//
+	// Alibabacloud/1
 	UserAgent *string `json:"userAgent,omitempty" xml:"userAgent,omitempty"`
 	// socks5 proxy
 	Socks5Proxy *string `json:"socks5Proxy,omitempty" xml:"socks5Proxy,omitempty"`
 	// socks5 network
+	//
+	// example:
+	//
+	// TCP
 	Socks5NetWork *string `json:"socks5NetWork,omitempty" xml:"socks5NetWork,omitempty"`
 	// 长链接最大空闲时长
 	MaxIdleTimeMillis *int `json:"maxIdleTimeMillis,omitempty" xml:"maxIdleTimeMillis,omitempty"`
@@ -152,7 +192,13 @@ func (s *Config) SetMaxRequestsPerHost(v int) *Config {
 // 子结构体
 type SubDemoStruct struct {
 	// name
+	// example:
+	//
+	// name
 	Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
+	// value
+	// example:
+	//
 	// value
 	Value *string `json:"value,omitempty" xml:"value,omitempty" require:"true"`
 }
@@ -178,18 +224,39 @@ func (s *SubDemoStruct) SetValue(v string) *SubDemoStruct {
 // ABC示例结构体
 type AbcDemoStruct struct {
 	// 字符串属性
+	// example:
+	//
+	// str
 	SomeString *string `json:"some_string,omitempty" xml:"some_string,omitempty" maxLength:"100" minLength:"10"`
 	// Long型属性
+	// example:
+	//
+	// 100
 	SomeNumber *int64 `json:"some_number,omitempty" xml:"some_number,omitempty" require:"true" maximum:"100" minimum:"1"`
 	// 布尔型
+	// example:
+	//
+	// true, false
 	SomeBoolean *bool `json:"some_boolean,omitempty" xml:"some_boolean,omitempty" require:"true"`
 	// ISO8601格式字符串：yyyy-MM-dd_T_HH:mm:ss_Z_
+	// example:
+	//
+	// 2018-10-10T10:10:00Z
 	SomeDate *string `json:"some_date,omitempty" xml:"some_date,omitempty" pattern:"\\d{4}[-]\\d{1,2}[-]\\d{1,2}[T]\\d{2}:\\d{2}:\\d{2}([Z]|([\\.]\\d{1,9})?[\\+]\\d{2}[\\:]?\\d{2})"`
 	// 字符串数组
+	// example:
+	//
+	// somestring
 	SomeStringList []*string `json:"some_string_list,omitempty" xml:"some_string_list,omitempty" type:"Repeated"`
 	// 子结构体
+	// example:
+	//
+	// { "name": "value" }
 	SomeStruct *SubDemoStruct `json:"some_struct,omitempty" xml:"some_struct,omitempty" require:"true"`
 	// 结构体数组
+	// example:
+	//
+	// [{"name": "value"}]
 	SomeStructList []*SubDemoStruct `json:"some_struct_list,omitempty" xml:"some_struct_list,omitempty" require:"true" type:"Repeated"`
 }
 
@@ -239,6 +306,9 @@ func (s *AbcDemoStruct) SetSomeStructList(v []*SubDemoStruct) *AbcDemoStruct {
 // TestDemo
 type TestDemo struct {
 	// id
+	// example:
+	//
+	// id
 	Demo *string `json:"demo,omitempty" xml:"demo,omitempty" require:"true"`
 }
 
@@ -258,7 +328,13 @@ func (s *TestDemo) SetDemo(v string) *TestDemo {
 // 模拟大安全类型
 type FaceImage struct {
 	// 1123
+	// example:
+	//
+	// 123
 	Content *string `json:"content,omitempty" xml:"content,omitempty"`
+	// 123
+	// example:
+	//
 	// 123
 	Rect *string `json:"rect,omitempty" xml:"rect,omitempty" require:"true"`
 }
@@ -284,10 +360,19 @@ func (s *FaceImage) SetRect(v string) *FaceImage {
 // 结构体返回结构
 type ResultListDemo struct {
 	// 返回结果码
+	// example:
+	//
+	// {"name":"value"}
 	Code *AbcDemoStruct `json:"code,omitempty" xml:"code,omitempty" require:"true"`
 	// 返回结果
+	// example:
+	//
+	// {"name":{"key":"value"}}
 	Data *AbcDemoStruct `json:"data,omitempty" xml:"data,omitempty" require:"true"`
 	// 返回信息
+	// example:
+	//
+	// {"message":"success"}
 	Message *AbcDemoStruct `json:"message,omitempty" xml:"message,omitempty" require:"true"`
 }
 
@@ -317,8 +402,14 @@ func (s *ResultListDemo) SetMessage(v *AbcDemoStruct) *ResultListDemo {
 // 姓名和年龄
 type NameAndAge struct {
 	// 姓名
+	// example:
+	//
+	// 张三
 	Name *string `json:"name,omitempty" xml:"name,omitempty"`
 	// 年龄
+	// example:
+	//
+	// 18
 	Age *int64 `json:"age,omitempty" xml:"age,omitempty"`
 }
 
@@ -355,10 +446,19 @@ func (s GongXiangnengli) GoString() string {
 // 初始参数
 type InitParks struct {
 	// 返回接收到请求的当前时间
+	// example:
+	//
+	// 2024-11-03 14:00
 	Time *string `json:"time,omitempty" xml:"time,omitempty" require:"true"`
 	// 操作人
+	// example:
+	//
+	// 姜泽琦
 	Operator *string `json:"operator,omitempty" xml:"operator,omitempty" require:"true"`
 	// 请求编号
+	// example:
+	//
+	// 1
 	Count *int64 `json:"count,omitempty" xml:"count,omitempty" require:"true"`
 }
 
@@ -388,6 +488,9 @@ func (s *InitParks) SetCount(v int64) *InitParks {
 // 11
 type InitPark struct {
 	// 1
+	// example:
+	//
+	// 1
 	Demo *string `json:"demo,omitempty" xml:"demo,omitempty" require:"true"`
 }
 
@@ -407,10 +510,19 @@ func (s *InitPark) SetDemo(v string) *InitPark {
 // 初始
 type InitPack struct {
 	// 请求时间
+	// example:
+	//
+	// 2018-10-10T10:10:00Z
 	Time *string `json:"time,omitempty" xml:"time,omitempty" require:"true" pattern:"\\d{4}[-]\\d{1,2}[-]\\d{1,2}[T]\\d{2}:\\d{2}:\\d{2}([Z]|([\\.]\\d{1,9})?[\\+]\\d{2}[\\:]?\\d{2})"`
 	// 请求人
+	// example:
+	//
+	// 张三
 	Operate *string `json:"operate,omitempty" xml:"operate,omitempty" require:"true"`
 	// 编号
+	// example:
+	//
+	// 1
 	Count *int64 `json:"count,omitempty" xml:"count,omitempty" require:"true"`
 }
 
@@ -440,10 +552,19 @@ func (s *InitPack) SetCount(v int64) *InitPack {
 // 测试使用
 type TestPark struct {
 	// 请求时间
+	// example:
+	//
+	// 2022-11-07 14:48
 	Time *string `json:"time,omitempty" xml:"time,omitempty" require:"true"`
 	// 请求人
+	// example:
+	//
+	// 张三
 	Operator *string `json:"operator,omitempty" xml:"operator,omitempty" require:"true"`
 	// 请求编号
+	// example:
+	//
+	// 1
 	Count *int64 `json:"count,omitempty" xml:"count,omitempty" require:"true"`
 }
 
@@ -473,6 +594,9 @@ func (s *TestPark) SetCount(v int64) *TestPark {
 // dev测试
 type DevTest struct {
 	// 超时时间
+	// example:
+	//
+	// 200
 	Timeout *string `json:"timeout,omitempty" xml:"timeout,omitempty" require:"true"`
 }
 
@@ -492,8 +616,14 @@ func (s *DevTest) SetTimeout(v string) *DevTest {
 // 键值对
 type NameValuePair struct {
 	// 键名
+	// example:
+	//
+	// key
 	Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
 	// 键值
+	// example:
+	//
+	// value
 	Value *string `json:"value,omitempty" xml:"value,omitempty" require:"true"`
 }
 
@@ -3444,10 +3574,11 @@ type Client struct {
 	MaxRequestsPerHost      *int
 }
 
-/**
- * Init client with Config
- * @param config config contains the necessary information to create a client
- */
+// Description:
+//
+// # Init client with Config
+//
+// @param config - config contains the necessary information to create a client
 func NewClient(config *Config) (*Client, error) {
 	client := new(Client)
 	err := client.Init(config)
@@ -3455,7 +3586,7 @@ func NewClient(config *Config) (*Client, error) {
 }
 
 func (client *Client) Init(config *Config) (_err error) {
-	if tea.BoolValue(util.IsUnset(tea.ToMap(config))) {
+	if tea.BoolValue(util.IsUnset(config)) {
 		_err = tea.NewSDKError(map[string]interface{}{
 			"code":    "ParameterMissing",
 			"message": "'config' can not be unset",
@@ -3484,16 +3615,23 @@ func (client *Client) Init(config *Config) (_err error) {
 	return nil
 }
 
-/**
- * Encapsulate the request and invoke the network
- * @param action api name
- * @param protocol http or https
- * @param method e.g. GET
- * @param pathname pathname of every api
- * @param request which contains request params
- * @param runtime which controls some details of call api, such as retry times
- * @return the response
- */
+// Description:
+//
+// # Encapsulate the request and invoke the network
+//
+// @param action - api name
+//
+// @param protocol - http or https
+//
+// @param method - e.g. GET
+//
+// @param pathname - pathname of every api
+//
+// @param request - which contains request params
+//
+// @param runtime - which controls some details of call api, such as retry times
+//
+// @return the response
 func (client *Client) DoRequest(version *string, action *string, protocol *string, method *string, pathname *string, request map[string]interface{}, headers map[string]*string, runtime *util.RuntimeOptions) (_result map[string]interface{}, _err error) {
 	_err = tea.Validate(runtime)
 	if _err != nil {
@@ -3602,10 +3740,11 @@ func (client *Client) DoRequest(version *string, action *string, protocol *strin
 	return _resp, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) QueryAlltestOne(request *QueryAlltestOneRequest) (_result *QueryAlltestOneResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -3618,10 +3757,11 @@ func (client *Client) QueryAlltestOne(request *QueryAlltestOneRequest) (_result 
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) QueryAlltestOneEx(request *QueryAlltestOneRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryAlltestOneResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -3636,10 +3776,11 @@ func (client *Client) QueryAlltestOneEx(request *QueryAlltestOneRequest, headers
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) ImportAlltestOne(request *ImportAlltestOneRequest) (_result *ImportAlltestOneResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -3652,10 +3793,11 @@ func (client *Client) ImportAlltestOne(request *ImportAlltestOneRequest) (_resul
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) ImportAlltestOneEx(request *ImportAlltestOneRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *ImportAlltestOneResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -3670,10 +3812,11 @@ func (client *Client) ImportAlltestOneEx(request *ImportAlltestOneRequest, heade
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) StabilizeAlltestOne(request *StabilizeAlltestOneRequest) (_result *StabilizeAlltestOneResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -3686,10 +3829,11 @@ func (client *Client) StabilizeAlltestOne(request *StabilizeAlltestOneRequest) (
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) StabilizeAlltestOneEx(request *StabilizeAlltestOneRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *StabilizeAlltestOneResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -3704,10 +3848,11 @@ func (client *Client) StabilizeAlltestOneEx(request *StabilizeAlltestOneRequest,
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) UnstabilizeAlltestOne(request *UnstabilizeAlltestOneRequest) (_result *UnstabilizeAlltestOneResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -3720,10 +3865,11 @@ func (client *Client) UnstabilizeAlltestOne(request *UnstabilizeAlltestOneReques
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) UnstabilizeAlltestOneEx(request *UnstabilizeAlltestOneRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *UnstabilizeAlltestOneResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -3738,10 +3884,11 @@ func (client *Client) UnstabilizeAlltestOneEx(request *UnstabilizeAlltestOneRequ
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台测试AAA
- * Summary: 个人工作台测试AAA
- */
+// Description:
+//
+// Description: 个人工作台测试AAA
+//
+// Summary: 个人工作台测试AAA
 func (client *Client) QueryAlltestTwo(request *QueryAlltestTwoRequest) (_result *QueryAlltestTwoResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -3754,10 +3901,11 @@ func (client *Client) QueryAlltestTwo(request *QueryAlltestTwoRequest) (_result 
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台测试AAA
- * Summary: 个人工作台测试AAA
- */
+// Description:
+//
+// Description: 个人工作台测试AAA
+//
+// Summary: 个人工作台测试AAA
 func (client *Client) QueryAlltestTwoEx(request *QueryAlltestTwoRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryAlltestTwoResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -3772,10 +3920,11 @@ func (client *Client) QueryAlltestTwoEx(request *QueryAlltestTwoRequest, headers
 	return _result, _err
 }
 
-/**
- * Description: 录入演示111
- * Summary: 录入演示API
- */
+// Description:
+//
+// Description: 录入演示111
+//
+// Summary: 录入演示API
 func (client *Client) PreviewDemo(request *PreviewDemoRequest) (_result *PreviewDemoResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -3788,10 +3937,11 @@ func (client *Client) PreviewDemo(request *PreviewDemoRequest) (_result *Preview
 	return _result, _err
 }
 
-/**
- * Description: 录入演示111
- * Summary: 录入演示API
- */
+// Description:
+//
+// Description: 录入演示111
+//
+// Summary: 录入演示API
 func (client *Client) PreviewDemoEx(request *PreviewDemoRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *PreviewDemoResponse, _err error) {
 	if !tea.BoolValue(util.IsUnset(request.FileObject)) {
 		uploadReq := &CreateAntcloudGatewayxFileUploadRequest{
@@ -3836,10 +3986,11 @@ func (client *Client) PreviewDemoEx(request *PreviewDemoRequest, headers map[str
 	return _result, _err
 }
 
-/**
- * Description: 测试导入api1
- * Summary: 测试导入api1
- */
+// Description:
+//
+// Description: 测试导入api1
+//
+// Summary: 测试导入api1
 func (client *Client) QueryGateway(request *QueryGatewayRequest) (_result *QueryGatewayResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -3852,10 +4003,11 @@ func (client *Client) QueryGateway(request *QueryGatewayRequest) (_result *Query
 	return _result, _err
 }
 
-/**
- * Description: 测试导入api1
- * Summary: 测试导入api1
- */
+// Description:
+//
+// Description: 测试导入api1
+//
+// Summary: 测试导入api1
 func (client *Client) QueryGatewayEx(request *QueryGatewayRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryGatewayResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -3870,10 +4022,11 @@ func (client *Client) QueryGatewayEx(request *QueryGatewayRequest, headers map[s
 	return _result, _err
 }
 
-/**
- * Description: 调试a s dddd
- * Summary: 调试1
- */
+// Description:
+//
+// Description: 调试a s dddd
+//
+// Summary: 调试1
 func (client *Client) QueryAbcdaAbcddaa(request *QueryAbcdaAbcddaaRequest) (_result *QueryAbcdaAbcddaaResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -3886,10 +4039,11 @@ func (client *Client) QueryAbcdaAbcddaa(request *QueryAbcdaAbcddaaRequest) (_res
 	return _result, _err
 }
 
-/**
- * Description: 调试a s dddd
- * Summary: 调试1
- */
+// Description:
+//
+// Description: 调试a s dddd
+//
+// Summary: 调试1
 func (client *Client) QueryAbcdaAbcddaaEx(request *QueryAbcdaAbcddaaRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryAbcdaAbcddaaResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -3904,10 +4058,11 @@ func (client *Client) QueryAbcdaAbcddaaEx(request *QueryAbcdaAbcddaaRequest, hea
 	return _result, _err
 }
 
-/**
- * Description: 测试大安全接口
- * Summary: 测试大安全接口
- */
+// Description:
+//
+// Description: 测试大安全接口
+//
+// Summary: 测试大安全接口
 func (client *Client) MatchSecurityFace(request *MatchSecurityFaceRequest) (_result *MatchSecurityFaceResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -3920,10 +4075,11 @@ func (client *Client) MatchSecurityFace(request *MatchSecurityFaceRequest) (_res
 	return _result, _err
 }
 
-/**
- * Description: 测试大安全接口
- * Summary: 测试大安全接口
- */
+// Description:
+//
+// Description: 测试大安全接口
+//
+// Summary: 测试大安全接口
 func (client *Client) MatchSecurityFaceEx(request *MatchSecurityFaceRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *MatchSecurityFaceResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -3938,10 +4094,11 @@ func (client *Client) MatchSecurityFaceEx(request *MatchSecurityFaceRequest, hea
 	return _result, _err
 }
 
-/**
- * Description: 文件上传测试接口
- * Summary: 文件上传测试接口
- */
+// Description:
+//
+// Description: 文件上传测试接口
+//
+// Summary: 文件上传测试接口
 func (client *Client) UploadTestFile(request *UploadTestFileRequest) (_result *UploadTestFileResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -3954,10 +4111,11 @@ func (client *Client) UploadTestFile(request *UploadTestFileRequest) (_result *U
 	return _result, _err
 }
 
-/**
- * Description: 文件上传测试接口
- * Summary: 文件上传测试接口
- */
+// Description:
+//
+// Description: 文件上传测试接口
+//
+// Summary: 文件上传测试接口
 func (client *Client) UploadTestFileEx(request *UploadTestFileRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *UploadTestFileResponse, _err error) {
 	if !tea.BoolValue(util.IsUnset(request.FileObject)) {
 		uploadReq := &CreateAntcloudGatewayxFileUploadRequest{
@@ -4002,10 +4160,11 @@ func (client *Client) UploadTestFileEx(request *UploadTestFileRequest, headers m
 	return _result, _err
 }
 
-/**
- * Description: 压测接口1
- * Summary: 压测接口1
- */
+// Description:
+//
+// Description: 压测接口1
+//
+// Summary: 压测接口1
 func (client *Client) QueryTimeOne(request *QueryTimeOneRequest) (_result *QueryTimeOneResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4018,10 +4177,11 @@ func (client *Client) QueryTimeOne(request *QueryTimeOneRequest) (_result *Query
 	return _result, _err
 }
 
-/**
- * Description: 压测接口1
- * Summary: 压测接口1
- */
+// Description:
+//
+// Description: 压测接口1
+//
+// Summary: 压测接口1
 func (client *Client) QueryTimeOneEx(request *QueryTimeOneRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryTimeOneResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4036,10 +4196,11 @@ func (client *Client) QueryTimeOneEx(request *QueryTimeOneRequest, headers map[s
 	return _result, _err
 }
 
-/**
- * Description: 压测接口2
- * Summary: 压测接口2
- */
+// Description:
+//
+// Description: 压测接口2
+//
+// Summary: 压测接口2
 func (client *Client) QueryTimeTwo(request *QueryTimeTwoRequest) (_result *QueryTimeTwoResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4052,10 +4213,11 @@ func (client *Client) QueryTimeTwo(request *QueryTimeTwoRequest) (_result *Query
 	return _result, _err
 }
 
-/**
- * Description: 压测接口2
- * Summary: 压测接口2
- */
+// Description:
+//
+// Description: 压测接口2
+//
+// Summary: 压测接口2
 func (client *Client) QueryTimeTwoEx(request *QueryTimeTwoRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryTimeTwoResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4070,10 +4232,11 @@ func (client *Client) QueryTimeTwoEx(request *QueryTimeTwoRequest, headers map[s
 	return _result, _err
 }
 
-/**
- * Description: 压测接口3
- * Summary: 压测接口3
- */
+// Description:
+//
+// Description: 压测接口3
+//
+// Summary: 压测接口3
 func (client *Client) QueryTimeThree(request *QueryTimeThreeRequest) (_result *QueryTimeThreeResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4086,10 +4249,11 @@ func (client *Client) QueryTimeThree(request *QueryTimeThreeRequest) (_result *Q
 	return _result, _err
 }
 
-/**
- * Description: 压测接口3
- * Summary: 压测接口3
- */
+// Description:
+//
+// Description: 压测接口3
+//
+// Summary: 压测接口3
 func (client *Client) QueryTimeThreeEx(request *QueryTimeThreeRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryTimeThreeResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4104,10 +4268,11 @@ func (client *Client) QueryTimeThreeEx(request *QueryTimeThreeRequest, headers m
 	return _result, _err
 }
 
-/**
- * Description: 压测接口4
- * Summary: 压测接口4
- */
+// Description:
+//
+// Description: 压测接口4
+//
+// Summary: 压测接口4
 func (client *Client) QueryTimeFour(request *QueryTimeFourRequest) (_result *QueryTimeFourResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4120,10 +4285,11 @@ func (client *Client) QueryTimeFour(request *QueryTimeFourRequest) (_result *Que
 	return _result, _err
 }
 
-/**
- * Description: 压测接口4
- * Summary: 压测接口4
- */
+// Description:
+//
+// Description: 压测接口4
+//
+// Summary: 压测接口4
 func (client *Client) QueryTimeFourEx(request *QueryTimeFourRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryTimeFourResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4138,10 +4304,11 @@ func (client *Client) QueryTimeFourEx(request *QueryTimeFourRequest, headers map
 	return _result, _err
 }
 
-/**
- * Description: 压测接口5
- * Summary: 压测接口5
- */
+// Description:
+//
+// Description: 压测接口5
+//
+// Summary: 压测接口5
 func (client *Client) QueryTimeFive(request *QueryTimeFiveRequest) (_result *QueryTimeFiveResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4154,10 +4321,11 @@ func (client *Client) QueryTimeFive(request *QueryTimeFiveRequest) (_result *Que
 	return _result, _err
 }
 
-/**
- * Description: 压测接口5
- * Summary: 压测接口5
- */
+// Description:
+//
+// Description: 压测接口5
+//
+// Summary: 压测接口5
 func (client *Client) QueryTimeFiveEx(request *QueryTimeFiveRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryTimeFiveResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4172,10 +4340,11 @@ func (client *Client) QueryTimeFiveEx(request *QueryTimeFiveRequest, headers map
 	return _result, _err
 }
 
-/**
- * Description: aaa
- * Summary: aaa
- */
+// Description:
+//
+// Description: aaa
+//
+// Summary: aaa
 func (client *Client) CccAaaBbb(request *CccAaaBbbRequest) (_result *CccAaaBbbResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4188,10 +4357,11 @@ func (client *Client) CccAaaBbb(request *CccAaaBbbRequest) (_result *CccAaaBbbRe
 	return _result, _err
 }
 
-/**
- * Description: aaa
- * Summary: aaa
- */
+// Description:
+//
+// Description: aaa
+//
+// Summary: aaa
 func (client *Client) CccAaaBbbEx(request *CccAaaBbbRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *CccAaaBbbResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4206,10 +4376,11 @@ func (client *Client) CccAaaBbbEx(request *CccAaaBbbRequest, headers map[string]
 	return _result, _err
 }
 
-/**
- * Description: 已有产品创建api
- * Summary: 已有产品创建api
- */
+// Description:
+//
+// Description: 已有产品创建api
+//
+// Summary: 已有产品创建api
 func (client *Client) CreateapiExistingProducts(request *CreateapiExistingProductsRequest) (_result *CreateapiExistingProductsResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4222,10 +4393,11 @@ func (client *Client) CreateapiExistingProducts(request *CreateapiExistingProduc
 	return _result, _err
 }
 
-/**
- * Description: 已有产品创建api
- * Summary: 已有产品创建api
- */
+// Description:
+//
+// Description: 已有产品创建api
+//
+// Summary: 已有产品创建api
 func (client *Client) CreateapiExistingProductsEx(request *CreateapiExistingProductsRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *CreateapiExistingProductsResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4240,10 +4412,11 @@ func (client *Client) CreateapiExistingProductsEx(request *CreateapiExistingProd
 	return _result, _err
 }
 
-/**
- * Description: 已有产品下创建的api
- * Summary: 已有产品下创建的api
- */
+// Description:
+//
+// Description: 已有产品下创建的api
+//
+// Summary: 已有产品下创建的api
 func (client *Client) APreCreateApi(request *APreCreateApiRequest) (_result *APreCreateApiResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4256,10 +4429,11 @@ func (client *Client) APreCreateApi(request *APreCreateApiRequest) (_result *APr
 	return _result, _err
 }
 
-/**
- * Description: 已有产品下创建的api
- * Summary: 已有产品下创建的api
- */
+// Description:
+//
+// Description: 已有产品下创建的api
+//
+// Summary: 已有产品下创建的api
 func (client *Client) APreCreateApiEx(request *APreCreateApiRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *APreCreateApiResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4274,10 +4448,11 @@ func (client *Client) APreCreateApiEx(request *APreCreateApiRequest, headers map
 	return _result, _err
 }
 
-/**
- * Description: 测试使用api
- * Summary: 测试使用api
- */
+// Description:
+//
+// Description: 测试使用api
+//
+// Summary: 测试使用api
 func (client *Client) ApiTestCreate(request *ApiTestCreateRequest) (_result *ApiTestCreateResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4290,10 +4465,11 @@ func (client *Client) ApiTestCreate(request *ApiTestCreateRequest) (_result *Api
 	return _result, _err
 }
 
-/**
- * Description: 测试使用api
- * Summary: 测试使用api
- */
+// Description:
+//
+// Description: 测试使用api
+//
+// Summary: 测试使用api
 func (client *Client) ApiTestCreateEx(request *ApiTestCreateRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *ApiTestCreateResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4308,10 +4484,11 @@ func (client *Client) ApiTestCreateEx(request *ApiTestCreateRequest, headers map
 	return _result, _err
 }
 
-/**
- * Description: 用于测试api评审接入SDL/修改后的评审/0323
- * Summary: 用于测试api评审接入SDL/修改后的评审/0323
- */
+// Description:
+//
+// Description: 用于测试api评审接入SDL/修改后的评审/0323
+//
+// Summary: 用于测试api评审接入SDL/修改后的评审/0323
 func (client *Client) QueryApprovalTest(request *QueryApprovalTestRequest) (_result *QueryApprovalTestResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4324,10 +4501,11 @@ func (client *Client) QueryApprovalTest(request *QueryApprovalTestRequest) (_res
 	return _result, _err
 }
 
-/**
- * Description: 用于测试api评审接入SDL/修改后的评审/0323
- * Summary: 用于测试api评审接入SDL/修改后的评审/0323
- */
+// Description:
+//
+// Description: 用于测试api评审接入SDL/修改后的评审/0323
+//
+// Summary: 用于测试api评审接入SDL/修改后的评审/0323
 func (client *Client) QueryApprovalTestEx(request *QueryApprovalTestRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryApprovalTestResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4342,10 +4520,11 @@ func (client *Client) QueryApprovalTestEx(request *QueryApprovalTestRequest, hea
 	return _result, _err
 }
 
-/**
- * Description: 1
- * Summary: 1
- */
+// Description:
+//
+// Description: 1
+//
+// Summary: 1
 func (client *Client) AzxdAzsx(request *AzxdAzsxRequest) (_result *AzxdAzsxResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4358,10 +4537,11 @@ func (client *Client) AzxdAzsx(request *AzxdAzsxRequest) (_result *AzxdAzsxRespo
 	return _result, _err
 }
 
-/**
- * Description: 1
- * Summary: 1
- */
+// Description:
+//
+// Description: 1
+//
+// Summary: 1
 func (client *Client) AzxdAzsxEx(request *AzxdAzsxRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *AzxdAzsxResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4376,10 +4556,11 @@ func (client *Client) AzxdAzsxEx(request *AzxdAzsxRequest, headers map[string]*s
 	return _result, _err
 }
 
-/**
- * Description: 钟忆个人工作台预发测试1
- * Summary: 钟忆个人工作台预发测试1
- */
+// Description:
+//
+// Description: 钟忆个人工作台预发测试1
+//
+// Summary: 钟忆个人工作台预发测试1
 func (client *Client) QueryTestOne(request *QueryTestOneRequest) (_result *QueryTestOneResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4392,10 +4573,11 @@ func (client *Client) QueryTestOne(request *QueryTestOneRequest) (_result *Query
 	return _result, _err
 }
 
-/**
- * Description: 钟忆个人工作台预发测试1
- * Summary: 钟忆个人工作台预发测试1
- */
+// Description:
+//
+// Description: 钟忆个人工作台预发测试1
+//
+// Summary: 钟忆个人工作台预发测试1
 func (client *Client) QueryTestOneEx(request *QueryTestOneRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryTestOneResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4410,10 +4592,11 @@ func (client *Client) QueryTestOneEx(request *QueryTestOneRequest, headers map[s
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) ImportTestOne(request *ImportTestOneRequest) (_result *ImportTestOneResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4426,10 +4609,11 @@ func (client *Client) ImportTestOne(request *ImportTestOneRequest) (_result *Imp
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) ImportTestOneEx(request *ImportTestOneRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *ImportTestOneResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4444,10 +4628,11 @@ func (client *Client) ImportTestOneEx(request *ImportTestOneRequest, headers map
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) StabilizeTestOne(request *StabilizeTestOneRequest) (_result *StabilizeTestOneResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4460,10 +4645,11 @@ func (client *Client) StabilizeTestOne(request *StabilizeTestOneRequest) (_resul
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) StabilizeTestOneEx(request *StabilizeTestOneRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *StabilizeTestOneResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4478,10 +4664,11 @@ func (client *Client) StabilizeTestOneEx(request *StabilizeTestOneRequest, heade
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) CaptureTestOne(request *CaptureTestOneRequest) (_result *CaptureTestOneResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4494,10 +4681,11 @@ func (client *Client) CaptureTestOne(request *CaptureTestOneRequest) (_result *C
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) CaptureTestOneEx(request *CaptureTestOneRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *CaptureTestOneResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4512,10 +4700,11 @@ func (client *Client) CaptureTestOneEx(request *CaptureTestOneRequest, headers m
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) MatchTestOne(request *MatchTestOneRequest) (_result *MatchTestOneResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4528,10 +4717,11 @@ func (client *Client) MatchTestOne(request *MatchTestOneRequest) (_result *Match
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) MatchTestOneEx(request *MatchTestOneRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *MatchTestOneResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4546,10 +4736,11 @@ func (client *Client) MatchTestOneEx(request *MatchTestOneRequest, headers map[s
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) OperateTestOne(request *OperateTestOneRequest) (_result *OperateTestOneResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4562,10 +4753,11 @@ func (client *Client) OperateTestOne(request *OperateTestOneRequest) (_result *O
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) OperateTestOneEx(request *OperateTestOneRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *OperateTestOneResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4580,10 +4772,11 @@ func (client *Client) OperateTestOneEx(request *OperateTestOneRequest, headers m
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台新增接口测试
- * Summary: 个人工作台新增接口测试
- */
+// Description:
+//
+// Description: 个人工作台新增接口测试
+//
+// Summary: 个人工作台新增接口测试
 func (client *Client) TimeTestOne(request *TimeTestOneRequest) (_result *TimeTestOneResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4596,10 +4789,11 @@ func (client *Client) TimeTestOne(request *TimeTestOneRequest) (_result *TimeTes
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台新增接口测试
- * Summary: 个人工作台新增接口测试
- */
+// Description:
+//
+// Description: 个人工作台新增接口测试
+//
+// Summary: 个人工作台新增接口测试
 func (client *Client) TimeTestOneEx(request *TimeTestOneRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *TimeTestOneResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4614,10 +4808,11 @@ func (client *Client) TimeTestOneEx(request *TimeTestOneRequest, headers map[str
 	return _result, _err
 }
 
-/**
- * Description: 哈哈哈哈哈哈哈哈个人工作台二期预发测试qqq
- * Summary: 哈哈哈哈哈哈哈哈个人工作台二期预发测试qqq
- */
+// Description:
+//
+// Description: 哈哈哈哈哈哈哈哈个人工作台二期预发测试qqq
+//
+// Summary: 哈哈哈哈哈哈哈哈个人工作台二期预发测试qqq
 func (client *Client) QueryOneLimit(request *QueryOneLimitRequest) (_result *QueryOneLimitResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4630,10 +4825,11 @@ func (client *Client) QueryOneLimit(request *QueryOneLimitRequest) (_result *Que
 	return _result, _err
 }
 
-/**
- * Description: 哈哈哈哈哈哈哈哈个人工作台二期预发测试qqq
- * Summary: 哈哈哈哈哈哈哈哈个人工作台二期预发测试qqq
- */
+// Description:
+//
+// Description: 哈哈哈哈哈哈哈哈个人工作台二期预发测试qqq
+//
+// Summary: 哈哈哈哈哈哈哈哈个人工作台二期预发测试qqq
 func (client *Client) QueryOneLimitEx(request *QueryOneLimitRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryOneLimitResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4648,10 +4844,11 @@ func (client *Client) QueryOneLimitEx(request *QueryOneLimitRequest, headers map
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) ImportOneLimit(request *ImportOneLimitRequest) (_result *ImportOneLimitResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4664,10 +4861,11 @@ func (client *Client) ImportOneLimit(request *ImportOneLimitRequest) (_result *I
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) ImportOneLimitEx(request *ImportOneLimitRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *ImportOneLimitResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4682,10 +4880,11 @@ func (client *Client) ImportOneLimitEx(request *ImportOneLimitRequest, headers m
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) StabilizeOneLimit(request *StabilizeOneLimitRequest) (_result *StabilizeOneLimitResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4698,10 +4897,11 @@ func (client *Client) StabilizeOneLimit(request *StabilizeOneLimitRequest) (_res
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) StabilizeOneLimitEx(request *StabilizeOneLimitRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *StabilizeOneLimitResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4716,10 +4916,11 @@ func (client *Client) StabilizeOneLimitEx(request *StabilizeOneLimitRequest, hea
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期测试接口
- * Summary: 个人工作台二期测试接口
- */
+// Description:
+//
+// Description: 个人工作台二期测试接口
+//
+// Summary: 个人工作台二期测试接口
 func (client *Client) UnstabilizeOneLimit(request *UnstabilizeOneLimitRequest) (_result *UnstabilizeOneLimitResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4732,10 +4933,11 @@ func (client *Client) UnstabilizeOneLimit(request *UnstabilizeOneLimitRequest) (
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期测试接口
- * Summary: 个人工作台二期测试接口
- */
+// Description:
+//
+// Description: 个人工作台二期测试接口
+//
+// Summary: 个人工作台二期测试接口
 func (client *Client) UnstabilizeOneLimitEx(request *UnstabilizeOneLimitRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *UnstabilizeOneLimitResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4750,10 +4952,11 @@ func (client *Client) UnstabilizeOneLimitEx(request *UnstabilizeOneLimitRequest,
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) ResetOneLimit(request *ResetOneLimitRequest) (_result *ResetOneLimitResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4766,10 +4969,11 @@ func (client *Client) ResetOneLimit(request *ResetOneLimitRequest) (_result *Res
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) ResetOneLimitEx(request *ResetOneLimitRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *ResetOneLimitResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4784,10 +4988,11 @@ func (client *Client) ResetOneLimitEx(request *ResetOneLimitRequest, headers map
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) WithdrawOneLimit(request *WithdrawOneLimitRequest) (_result *WithdrawOneLimitResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4800,10 +5005,11 @@ func (client *Client) WithdrawOneLimit(request *WithdrawOneLimitRequest) (_resul
 	return _result, _err
 }
 
-/**
- * Description: 个人工作台二期预发测试
- * Summary: 个人工作台二期预发测试
- */
+// Description:
+//
+// Description: 个人工作台二期预发测试
+//
+// Summary: 个人工作台二期预发测试
 func (client *Client) WithdrawOneLimitEx(request *WithdrawOneLimitRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *WithdrawOneLimitResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4818,10 +5024,11 @@ func (client *Client) WithdrawOneLimitEx(request *WithdrawOneLimitRequest, heade
 	return _result, _err
 }
 
-/**
- * Description: 用于共享能力中心六期接入rasp回归验证
- * Summary: 用于共享能力中心六期接入rasp回归验证
- */
+// Description:
+//
+// Description: 用于共享能力中心六期接入rasp回归验证
+//
+// Summary: 用于共享能力中心六期接入rasp回归验证
 func (client *Client) QueryGongxiangTesttest(request *QueryGongxiangTesttestRequest) (_result *QueryGongxiangTesttestResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4834,10 +5041,11 @@ func (client *Client) QueryGongxiangTesttest(request *QueryGongxiangTesttestRequ
 	return _result, _err
 }
 
-/**
- * Description: 用于共享能力中心六期接入rasp回归验证
- * Summary: 用于共享能力中心六期接入rasp回归验证
- */
+// Description:
+//
+// Description: 用于共享能力中心六期接入rasp回归验证
+//
+// Summary: 用于共享能力中心六期接入rasp回归验证
 func (client *Client) QueryGongxiangTesttestEx(request *QueryGongxiangTesttestRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryGongxiangTesttestResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
@@ -4852,10 +5060,11 @@ func (client *Client) QueryGongxiangTesttestEx(request *QueryGongxiangTesttestRe
 	return _result, _err
 }
 
-/**
- * Description: 创建HTTP PUT提交的文件上传
- * Summary: 文件上传创建
- */
+// Description:
+//
+// Description: 创建HTTP PUT提交的文件上传
+//
+// Summary: 文件上传创建
 func (client *Client) CreateAntcloudGatewayxFileUpload(request *CreateAntcloudGatewayxFileUploadRequest) (_result *CreateAntcloudGatewayxFileUploadResponse, _err error) {
 	runtime := &util.RuntimeOptions{}
 	headers := make(map[string]*string)
@@ -4868,10 +5077,11 @@ func (client *Client) CreateAntcloudGatewayxFileUpload(request *CreateAntcloudGa
 	return _result, _err
 }
 
-/**
- * Description: 创建HTTP PUT提交的文件上传
- * Summary: 文件上传创建
- */
+// Description:
+//
+// Description: 创建HTTP PUT提交的文件上传
+//
+// Summary: 文件上传创建
 func (client *Client) CreateAntcloudGatewayxFileUploadEx(request *CreateAntcloudGatewayxFileUploadRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *CreateAntcloudGatewayxFileUploadResponse, _err error) {
 	_err = util.ValidateModel(request)
 	if _err != nil {
